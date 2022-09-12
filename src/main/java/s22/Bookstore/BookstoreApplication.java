@@ -24,6 +24,8 @@ public class BookstoreApplication {
 			log.info("save a couple of books");
 			// Book(String title, String author, int year, String isbn, double price)
 			// Book(String title, String author)
+			
+			// Lisää kirjoja kirjakantaan
 			repository.save(new Book("Pimeät kuut", "Tommi Kinnunen", 2022, "9789510480991", 23.90));
 			repository.save(new Book("Matkani somen huipulle", "Roni Back", 2002, "9789511451938", 24.95));
 			repository.save(new Book("Uljas uusi maailma", "Aldous Huxley", 1932, "9789513199135", 17.95));
