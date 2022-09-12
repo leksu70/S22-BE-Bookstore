@@ -19,7 +19,6 @@ import s22.Bookstore.domain.BookstoreRepository;
 		
 	    @RequestMapping(value= {"/", "/booklist"})
 	    public String bookList(Model model) {	
-
 	        model.addAttribute("books", repository.findAll());
 	        return "booklist";
 	    }
@@ -28,7 +27,14 @@ import s22.Bookstore.domain.BookstoreRepository;
 	    public String addBook(Model model){
 	    	model.addAttribute("book", new Book());
 	        return "addbook";
-	    }     
+	    }
+	    
+	    @RequestMapping(value = "/edit/{id}")
+	    public String editBook(@PathVariable("id") Long bookId, Model model) {
+	    	model.addAttribute("edit", repository.findById(bookId));
+	    	
+	    	return "editbook";
+	    }
 	    
 	    @RequestMapping(value = "/save", method = RequestMethod.POST)
 	    public String save(Book book){
