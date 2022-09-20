@@ -1,51 +1,26 @@
 package s22.Bookstore.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Book {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 	
-	private String title, author;
-	private int bookYear;
-	private String isbn;
-	private double price;
+	@Id
+	private String title, author, isbn;
+	private double year, price;
 	
 	public Book() {
 		super();
 	}
 
-	public Book(Long id, String title, String author, int bookYear, String isbn, double price) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.author = author;
-		this.bookYear = bookYear;
-		this.isbn = isbn;
-		this.price = price;
-	}
-
-	public Book(String title, String author, int bookYear, String isbn, double price) {
+	public Book(String title, String author, String isbn, double year, double price) {
 		super();
 		this.title = title;
 		this.author = author;
-		this.bookYear = bookYear;
 		this.isbn = isbn;
+		this.year = year;
 		this.price = price;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
@@ -64,20 +39,20 @@ public class Book {
 		this.author = author;
 	}
 
-	public int getBookyear() {
-		return bookYear;
-	}
-
-	public void setBookyear(int bookYear) {
-		this.bookYear = bookYear;
-	}
-
 	public String getIsbn() {
 		return isbn;
 	}
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public double getYear() {
+		return year;
+	}
+
+	public void setYear(double year) {
+		this.year = year;
 	}
 
 	public double getPrice() {
@@ -90,8 +65,10 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", bookYear=" + bookYear + ", isbn="
-				+ isbn + ", price=" + price + "]";
+		return "Book [title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year + ", price=" + price
+				+ "]";
 	}
+
+	
 	
 }
