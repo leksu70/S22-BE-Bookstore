@@ -8,14 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
 	@Id
 	@GeneratedValue( strategy=GenerationType.AUTO )
-	private Long categoryid;
+	private Long catid;
+	
+	@Size(min=2, max=30)
 	private String name;
 	
+	@JsonIgnore	// this prevents the infinate loop in our books REST Service, Lisätty 26.9.
 	@OneToMany( cascade = CascadeType.ALL, mappedBy = "category" )
 	private List<Book> books;
 	
@@ -29,12 +35,12 @@ public class Category {
 	}
 
 	// Luodaan Gettersit ja Settersit
-	public Long getCategoryid() {
-		return categoryid;
+	public Long getCatid() {
+		return catid;
 	}
 
-	public void setCategoryid(Long categoryid) {
-		this.categoryid = categoryid;
+	public void setCatid(Long catid) {
+		this.catid = catid;
 	}
 
 	public String getName() {
@@ -56,7 +62,7 @@ public class Category {
 	// Luodaan toString. HUOM. Ilman books-listaa, sillä sen toString sisältää jo categoryn.
 	@Override
 	public String toString() {
-		return "Category [categoryid=" + categoryid + ", name=" + name + "]";
+		return "Category [catid=" + catid + ", name=" + name + "]";
 	}
 
 }

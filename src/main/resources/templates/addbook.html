@@ -1,35 +1,50 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Booklist</title>
+	<title>Add book</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> -->
 </head>
 <body>
 	<h2>Add book</h2>
 	<div>
-		<form action="#" th:object="${book}" th:action="@{save}" method="post">
-			<label for="title">Title</label>
-			<input type="text" id="title" th:field="*{title}" /><br />
-			
-			<label for="author">Author</label>
-			<input type="text" id="author" th:field="*{author}" /><br />
-			
-			<label for="bookYear">Year</label>
-			<input type="text" id="bookYear" th:field="*{bookYear}" /><br />
-			
-			<label for="isbn">ISBN</label>
-			<input type="text" id="isbn" th:field="*{isbn}" /><br />
-			
-			<label for="price">Price</label>
-			<input type="text" id="price" th:field="*{price}" /><br />
-			
-			<label for="catlist">Category</label>
-			<select id="catlist" th:field="*{category}" class="form-control">
-       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
-    		</select>
-			
-			<div style="clear: both; display: block; height: 10px;"></div>						
-			<input type="submit" value="Save" />
+		<form action="#" th:object="${book}" th:action="@{savebook}" method="post">
+			<table class="table table-striped">
+				<tr>
+					<td>Title: </td>
+					<td><input type="text" th:field="*{title}" /></td>
+					<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</td>
+				</tr>
+				<tr>
+					<td>Author: </td>
+					<td><input type="text" th:field="*{author}" /></td>
+					<td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</td>
+				</tr>
+				<tr>
+					<td>Year: </td>
+					<td><input type="text" th:field="*{bookYear}" size="4" /></td>
+					<td th:if="${#fields.hasErrors('bookYear')}" th:errors="*{bookYear}">Error</td>
+				</tr>
+				<tr>
+					<td>ISBN: </td>
+					<td><input type="text" th:field="*{isbn}" /></td>
+					<td th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Error</td>
+				</tr>
+				<tr>
+					<td>Price: </td><td><input type="number" step="0.01" th:field="*{price}" /></td>
+					<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</td>
+				</tr>
+				<tr> <!-- Virheen sattuessa tämä ei ole mukana sivulla tai siis on tyhjä -->
+					<td>Category: </td><!-- <td><input type="text" th:field="*{category}" /></td> -->
+					<td><select id="catlist" th:field="*{category}" ><!-- class="form-control" -->
+       					<option th:each="category: ${categories}" th:value="${category.catid}" th:text="${category.name}"></option>
+    				</select></td>
+    				<td></td>
+				</tr>
+				
+			</table>
+			<div style="clear: both; display: block; height: 10px;"></div>					
+			<input type="submit" value="Save" class="btn btn-success" />
 		
 		</form>
 	</div>

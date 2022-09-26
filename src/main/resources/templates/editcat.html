@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Edit Category</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>Edit category</h2>
+	<div>
+		<form action="#" th:object="${category}" th:action="@{/savecat}" method="post">
+			<input type="hidden" id="catid" th:field="*{catid}" />
+			<table class="table table-striped">
+		<tr>
+		    <td>Name</th>
+		    <td />	    
+		</tr>
+		<tr th:each="cat : ${categories}">
+			<td th:text="${cat.name}" />			
+			<td><a th:href="@{/delete/cat/{id}(id=${cat.catid})}" class="btn btn-danger">Delete</a>
+			    <a th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a></td>
+    	</tr>
+     </table>
+     <br />
+	 <a href="/addcat" class="btn btn-success">Add Category</a> 
+				
+			<!-- <div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save" /> -->
+		
+		</form>
+
+	</div>
+</body>
+	
+</html>
