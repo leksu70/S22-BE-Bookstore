@@ -53,7 +53,7 @@ public class BookstoreController {
 			// Virhe! Luo uuden entryn
 			model.addAttribute("book", bookrepository.findById(book.getId()));
 			model.addAttribute("categories", catrepository.findAll());
-			return "addbook";
+			return "editbook";
 		}
 		bookrepository.save(book);
 		return "redirect:booklist";

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +33,14 @@ public class CategoryRestController {
         return catrepository.findAll();
     }
 	
+	// RESTful service to save a category - Ei toimi
+		@PostMapping(value="/categories")
+		public Iterable<Category> addBookRest(Category cat, Model model) {
+			System.out.println("REST:Category:" + cat.toString());
+			catrepository.save(cat);
+			return catrepository.findAll();
+		}
+		
 	// RESTful service to get category by id - toimii
 	@GetMapping(value="/categories/{id}")
 	public Optional<Category> findCatRest(@PathVariable("id") Long catId) {	
