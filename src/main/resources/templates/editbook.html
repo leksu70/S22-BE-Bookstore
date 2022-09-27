@@ -3,48 +3,49 @@
 <head>
 	<title>Booklist</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 	<h2>Edit book</h2>
 	<div>
 		<form action="#" th:object="${book}" th:action="@{/savebook}" method="post">
 			<input type="hidden" id="id" th:field="*{id}" />
-			<!-- <table>
+			<table class="table table-striped">
 				<tr>
-					<td>Title: <input type="text" id="title" th:field="*{title}" /></td>
+					<td>Title</td>
+					<td><input type="text" th:field="*{title}" /></td>
 					<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</td>
 				</tr>
-				
-				
+				<tr>
+					<td>Author</td>
+					<td><input type="text" th:field="*{author}" /></td>
+					<td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</td>
+				</tr>
+				<tr>
+					<td>Year</td>
+					<td><input type="text" th:field="*{bookYear}" /></td>
+					<td th:if="${#fields.hasErrors('bookYear')}" th:errors="*{bookYear}">Error</td>
+				</tr>
+				<tr>
+					<td>ISBN</td>
+					<td><input type="text" th:field="*{isbn}" /></td>
+					<td th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Error</td>
+				</tr>
+				<tr>
+					<td>Price</td>
+					<td><input type="number" step="0.01" th:field="*{price}" /></td>
+					<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td><select id="catlist" th:field="*{category}" class="form-control">
+       						<option th:each="category: ${categories}" th:value="${category.catid}" th:text="${category.name}" />
+    					</select></td>
+					<td></td>
+				</tr>
 			
-			</table>-->
+			</table>
 
-
-				<label for="title">Title</label>
-				<input type="text" id="title" th:field="*{title}" /> 
-				<div style="clear: both; display: block; height: 10px;"></div>
-
-				<label for="author">Author</label>
-				<input type="text" id="author" th:field="*{author}" /><br />
-				<div style="clear: both; display: block; height: 10px;"></div>
-
-				<label for="bookYear">Year</label>
-				<input type="number" id="bookYear" th:field="*{bookYear}" /><br />
-				<div style="clear: both; display: block; height: 10px;"></div>
-
-				<label for="isbn">ISBN</label>
-				<input type="text" id="isbn" th:field="*{isbn}" /><br />
-				<div style="clear: both; display: block; height: 10px;"></div>
-
-				<label for="price">Price</label>
-				<input type="number" id="price" th:field="*{price}" /><br />
-				<div style="clear: both; display: block; height: 10px;"></div>
-
-				<label for="catlist">Category</label>
-			 	<select id="catlist" th:field="*{category}" class="form-control">
-       			<option th:each="category: ${categories}" th:value="${category.catid}" th:text="${category.name}"></option>
-    			</select>
-				
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save" />
 		

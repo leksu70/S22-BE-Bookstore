@@ -10,12 +10,13 @@
 	<table class="table table-striped">
 		<tr>
 		    <th>Name</th>
-		    <th />	    
+		    <th>Actions</th>
+		    
 		</tr>
 		<tr th:each="cat : ${categories}">
 			<td th:text="${cat.name}" />			
 			<td><a th:href="@{/delete/cat/{id}(id=${cat.catid})}" class="btn btn-danger">Delete</a>
-			<a th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a></td>
+			    <a th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a></td>
     	</tr>
      </table>
      <br />

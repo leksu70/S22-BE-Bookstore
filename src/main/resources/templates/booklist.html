@@ -14,10 +14,8 @@
 		    <th>ISBN</th>
 		    <th>Year</th>
 		   	<th>Category</th>
-		    <th />
-		    <th />
+		    <th>Actions</th>
 		</tr>
-		 
 		<tr th:each="book : ${books}">
 			<td th:text="${book.title}" />
 			<td th:text="${book.author}" />
@@ -26,8 +24,8 @@
 			<!-- <td th:text="${#numbers.formatDecimal(book.price, 1, 'POINT', 2, 'COMMA')}" />  -->
 			<th th:text="${book.category.name}" />
 			
-			<td><a th:href="@{/delete/book/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
-			<td><a th:href="@{/edit/book/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
+			<td><a th:href="@{/delete/book/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+			    <a th:href="@{/edit/book/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
     	</tr>
      </table>
      <br />
