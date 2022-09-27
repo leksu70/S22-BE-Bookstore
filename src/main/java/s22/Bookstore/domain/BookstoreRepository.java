@@ -16,6 +16,6 @@ public interface BookstoreRepository extends CrudRepository<Book, Long> {
 	// Ebanling ORDER BY for a query
 	//List<Book> findByBookAuthorOrderByTitle(String author);
 	
-	List<Book> findByTitle(String title);
+	//List<Book> findByTitle(String title);
     
 }

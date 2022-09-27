@@ -49,7 +49,10 @@ public class BookstoreController {
 	@PostMapping("/savebook")
 	public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			System.out.println("some error happened");
+			System.out.println("some error happened. book.id:" + book.getId());
+			// Virhe! Luo uuden entryn
+			model.addAttribute("book", bookrepository.findById(book.getId()));
+			model.addAttribute("categories", catrepository.findAll());
 			return "addbook";
 		}
 		bookrepository.save(book);
