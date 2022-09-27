@@ -3,6 +3,7 @@ package s22.Bookstore.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,9 +28,16 @@ public class BookstoreController {
 		model.addAttribute("books", bookrepository.findAll());
 		return "booklist";
 	}
+	
+	@GetMapping("/main")
+	public String runMain() {
+		return "/main";
+	}
 
 	@GetMapping("/addbook")
-	public String addBook(@Valid Book book, BindingResult bindingResult, Model model) {
+	// Toimii, jos ei ole @Valid!
+	// public String addBook(@Valid Book book, BindingResult bindingResult, Model model) {
+	public String addBook(Book book, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("some error happened while saving category");
 			return "addbook";
@@ -77,13 +85,16 @@ public class BookstoreController {
 	}
 	
 	// Categories part
+	
 	@GetMapping("/catlist")
 	public String catList(Model model) {
 		model.addAttribute("categories", catrepository.findAll());
 		return "catlist";
 	}
 	
+	
 	@GetMapping("/addcat")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String addCat(Model model) {
 		model.addAttribute("category", new Category());
 		model.addAttribute("categories", catrepository.findAll());

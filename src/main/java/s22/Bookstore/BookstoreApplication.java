@@ -12,19 +12,28 @@ import s22.Bookstore.domain.Book;
 import s22.Bookstore.domain.BookstoreRepository;
 import s22.Bookstore.domain.Category;
 import s22.Bookstore.domain.CategoryRepository;
+import s22.Bookstore.domain.User;
+import s22.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
 	
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
+	@Autowired
+	BookstoreRepository bookrepository;
+	@Autowired
+	CategoryRepository catrepository;
+	@Autowired
+	UserRepository userrepository;
+	
 	////// Eli voidaan käyttää myös tätä rakennetta:
 	//// we need repository interfaces to put demo data to db, jos käytetään:
 	// public void run(String... args) throws Exception {
 	//@Autowired
 	//BookstoreRepository bookrepository;
 	//@Autowired
-	//CategoryRepository catRepository;
+	//CategoryRepository catrepository;
 	//@Override
 	//public void run(String... args) throws Exception {
 	//
@@ -43,9 +52,19 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookstoreRepository bookrepository, CategoryRepository catrepository) {
+	public CommandLineRunner bookDemo(BookstoreRepository bookrepository, CategoryRepository catrepository, UserRepository userrepository) {
 		
 		return (args) -> {
+			log.info("Luodaan käyttäjät user ja admin:");
+			userrepository.save(new User("Leo", "Sutinen", "USER", "user", "$2a$10$w5PQ5/6l.5isfaBBpxNbHeDC3xay1eh0bSUuwQV5oJW6K57FGLfPm"));
+			userrepository.save(new User("Leo", "Admin", "ADMIN", "admin", "$2a$10$r3hj/zxT5nuMM6YciHlnYuH0wOZmEXXlfEu7ysHsFTdq652kLJwDu"));
+			
+			log.info("Haetaan kaikki käyttäjät:");
+			for (User user : userrepository.findAll()) {
+				log.info(user.toString());
+				
+			}
+			
 			log.info("Luodaan kirjakategoriat:");
 			catrepository.save(new Category("Scifi"));
 			catrepository.save(new Category("Kaunokirjallisuus"));
