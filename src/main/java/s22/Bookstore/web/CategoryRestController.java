@@ -24,13 +24,13 @@ public class CategoryRestController {
 	private CategoryRepository catrepository;
 
 	// RESTful service to get all categories
-	@GetMapping(value={"/cats", "/cats/"})
+	@GetMapping(value={"/categories", "/categories/"})
 	public @ResponseBody Iterable<Category> catListRest() {	
         return catrepository.findAll();
     }
 	
 	// RESTful service to get category by id
-	@GetMapping(value="/cats/{id}")
+	@GetMapping(value="/categories/{id}")
 	public @ResponseBody Optional<Category> findCatRest(@PathVariable("id") Long catId) {	
     	return catrepository.findById(catId);
     } 
