@@ -56,7 +56,14 @@ public class BookstoreApplication {
 		
 		return (args) -> {
 			log.info("Luodaan käyttäjät user ja admin:");
-			userrepository.save(new User("Leo", "Sutinen", "USER", "user", "$2a$10$w5PQ5/6l.5isfaBBpxNbHeDC3xay1eh0bSUuwQV5oJW6K57FGLfPm"));
+			
+			// Luodaan tavallinen käyttäjä: user
+			User user1 = new User("Leo", "Sutinen", "USER", "user", "$2a$10$w5PQ5/6l.5isfaBBpxNbHeDC3xay1eh0bSUuwQV5oJW6K57FGLfPm");
+			userrepository.save(user1);
+			//userrepository.save(new User("Leo", "Sutinen", "USER", "user", "$2a$10$w5PQ5/6l.5isfaBBpxNbHeDC3xay1eh0bSUuwQV5oJW6K57FGLfPm"));
+			
+			// Luodaan ADMIN-tason käyttäjä: admin
+			//User user2 = new User("Leo", "Admin", "ADMIN", "admin", "$2a$10$r3hj/zxT5nuMM6YciHlnYuH0wOZmEXXlfEu7ysHsFTdq652kLJwDu");
 			userrepository.save(new User("Leo", "Admin", "ADMIN", "admin", "$2a$10$r3hj/zxT5nuMM6YciHlnYuH0wOZmEXXlfEu7ysHsFTdq652kLJwDu"));
 			
 			log.info("Haetaan kaikki käyttäjät:");

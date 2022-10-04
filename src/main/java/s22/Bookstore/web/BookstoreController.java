@@ -78,6 +78,7 @@ public class BookstoreController {
 	}
 	
 	@GetMapping("/delete/book/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		System.out.println("bookId:" + bookId);
 		bookrepository.deleteById(bookId);
@@ -109,6 +110,7 @@ public class BookstoreController {
 	}
 	
 	@GetMapping("/delete/cat/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteCat(@PathVariable("id") Long id, Model model) {
 		catrepository.deleteById(id);
 		return "redirect:/catlist";

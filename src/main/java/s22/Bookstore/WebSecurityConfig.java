@@ -30,12 +30,17 @@ public class WebSecurityConfig {
 			auth.antMatchers("/h2-console").permitAll();
 			// hasRole is not working with H2
 			// auth.antMatchers("/owners/**").hasRole("ADMIN");
+			
 			// if user's role is ADMIN s/he has access to all pages "under" owners
 			auth.antMatchers("/owners/**").hasAuthority("ADMIN");
+			
 			// every http request will be authenticated
 			auth.anyRequest().authenticated();
+			// Voi olla myös erikseen valitut
+			//auth.antMatchers("/", "/booklist");
+			
 		}).csrf().ignoringAntMatchers("h2-console").and()
-				// tells where to go after successful login
+				// tells where to go after successful login: "landing page"
 				.formLogin().defaultSuccessUrl("/main", true).and()
 				// Logout is permitted for all users
 				.logout().permitAll().and()
