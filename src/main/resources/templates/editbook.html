@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Booklist</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -45,9 +46,9 @@
 				</tr>
 			
 			</table>
-
+			
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Save" />
+			<input type="submit" value="Save" sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary" />
 		
 		</form>
 

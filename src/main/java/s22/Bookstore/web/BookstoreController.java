@@ -48,6 +48,7 @@ public class BookstoreController {
 	}
 
 	@GetMapping("/edit/book/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookrepository.findById(bookId));
 		model.addAttribute("categories", catrepository.findAll());
@@ -78,7 +79,7 @@ public class BookstoreController {
 	}
 	
 	@GetMapping("/delete/book/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		System.out.println("bookId:" + bookId);
 		bookrepository.deleteById(bookId);
@@ -95,7 +96,7 @@ public class BookstoreController {
 	
 	
 	@GetMapping("/addcat")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addCat(Model model) {
 		model.addAttribute("category", new Category());
 		model.addAttribute("categories", catrepository.findAll());
@@ -103,6 +104,7 @@ public class BookstoreController {
 	}
 	
 	@GetMapping("/edit/cat/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editCat(@PathVariable("id") Long catId, Model model) {
 		System.out.println("catID(id):"+catId);
 		model.addAttribute("category", catrepository.findById(catId));
@@ -110,7 +112,7 @@ public class BookstoreController {
 	}
 	
 	@GetMapping("/delete/cat/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteCat(@PathVariable("id") Long id, Model model) {
 		catrepository.deleteById(id);
 		return "redirect:/catlist";

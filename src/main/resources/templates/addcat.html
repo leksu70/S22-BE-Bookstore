@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Category list</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,11 +19,9 @@
 			</table>
 		
 			<div style="clear: both; display: block; height: 10px;"></div>						
-			<input type="submit" value="Save" class="btn btn-primary" />
+			<input type="submit" value="Save" 
+				sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary" />
 			
-			<!-- <label for="name">Name</label>
-			<input type="text" id="name" th:field="*{name}" /><br /> -->
-			<!-- <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}"><br />Error</div> -->
 		</form>
 	</div>
 </body>
