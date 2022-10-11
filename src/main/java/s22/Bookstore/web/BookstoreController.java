@@ -15,6 +15,8 @@ import s22.Bookstore.domain.Book;
 import s22.Bookstore.domain.BookstoreRepository;
 import s22.Bookstore.domain.Category;
 import s22.Bookstore.domain.CategoryRepository;
+import s22.Bookstore.domain.User;
+import s22.Bookstore.domain.UserRepository;
 
 @Controller
 public class BookstoreController {
@@ -22,6 +24,8 @@ public class BookstoreController {
 	private BookstoreRepository bookrepository;
 	@Autowired
 	private CategoryRepository catrepository;
+	@Autowired
+	private UserRepository userrepository;
 
 	@GetMapping({ "/", "/booklist" })
 	public String bookList(Model model) {
@@ -121,5 +125,35 @@ public class BookstoreController {
 		return "redirect:/catlist";
 	}
 	
+	// User part
 	
+	@GetMapping("/userlist")
+	public String userList(Model model) {
+		model.addAttribute("categories", userrepository.findAll());
+		return "userlist";
+	}
+	
+	
+	@GetMapping("/adduser")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String addUser(Model model) {
+		model.addAttribute("category", new User());
+		model.addAttribute("categories", userrepository.findAll());
+		return "adduser";
+	}
+	
+	@GetMapping("/edit/user/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String editUser(@PathVariable("id") Long userId, Model model) {
+		System.out.println("userId(id):"+userId);
+		model.addAttribute("category", userrepository.findById(userId));
+		return "/edituser";
+	}
+	
+	@GetMapping("/delete/user/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String deleteUser(@PathVariable("id") Long id, Model model) {
+		userrepository.deleteById(id);
+		return "redirect:/userlist";
+	}
 }
