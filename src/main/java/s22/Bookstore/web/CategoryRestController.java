@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,6 +36,7 @@ public class CategoryRestController {
 	
 	// RESTful service to save a category - Ei toimi
 		@PostMapping(value="/categories")
+		//@PreAuthorize("hasAuthority('ADMIN')")
 		public Iterable<Category> addBookRest(Category cat, Model model) {
 			System.out.println("REST:Category:" + cat.toString());
 			catrepository.save(cat);
@@ -49,6 +51,7 @@ public class CategoryRestController {
 	
 	// RESTful service to delete id category - toimii
 	@DeleteMapping("/categories/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Iterable<Category> deleteCatRest(@PathVariable("id") Long catId, Model model) {
 		System.out.println("RESTful: catId:" + catId);
 		catrepository.deleteById(catId);

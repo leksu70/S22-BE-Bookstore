@@ -7,22 +7,39 @@
 	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h2>Add category</h2>
-	<div>
-		<form action="#" th:object="${category}" th:action="@{savecat}" method="post">
-			<table class="table table-striped">
-				<tr>
-					<td>Name: </td>
-					<td><input type="text" th:field="*{name}" /></td>
-					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
-				</tr>
-			</table>
-		
-			<div style="clear: both; display: block; height: 10px;"></div>						
-			<input type="submit" value="Save" 
-				sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary" />
+	<div class="container">
+		<div class="col-xs-9">
+			<h1>Add category</h1>
+		</div>
+		<div class="col-xs-3" style="padding:5px 0px 5px 5px" th:align="left">
+			<h5 th:inline="text" th:align="center" ><b>User: [[${#httpServletRequest.remoteUser}]]</b></h5>
+			<form th:action="@{/logout}" method="post" th:align="center">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+			</form>
+		</div>
+	
+		<div class="col-xs-12">
+			<form action="#" th:object="${category}" th:action="@{savecat}" method="post">
+				<table class="table table-striped">
+					<tr>
+						<td>Name: </td>
+						<td><input type="text" th:field="*{name}" /></td>
+						<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+					</tr>
 			
-		</form>
+			
+				<!-- <table class="table table-striped">
+					<tr>
+						<td>Name: </td>
+						<td><input type="text" th:field="*{name}" /></td>
+						<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+					</tr> -->
+				</table>
+			
+				<div style="clear: both; display: block; height: 10px;"></div>						
+				<input type="submit" value="Save" sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary" />
+			</form>
+		</div>
 	</div>
 </body>
 	

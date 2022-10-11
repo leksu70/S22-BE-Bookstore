@@ -35,6 +35,7 @@ public class BookstoreController {
 	}
 
 	@GetMapping("/addbook")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	// Toimii, jos ei ole @Valid!
 	// public String addBook(@Valid Book book, BindingResult bindingResult, Model model) {
 	public String addBook(Book book, BindingResult bindingResult, Model model) {
@@ -56,6 +57,7 @@ public class BookstoreController {
 	}
 	
 	@PostMapping("/savebook")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("some error happened. book.id:" + book.getId());
@@ -69,6 +71,7 @@ public class BookstoreController {
 	}
 	
 	@PostMapping("/savecat")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveCat(@Valid Category cat, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("some error happened while saving category");

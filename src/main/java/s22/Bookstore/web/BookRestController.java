@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,7 @@ public class BookRestController {
 	
 	// RESTful service to save a book - Ei toimi
 	@PostMapping(value="/books")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	public Iterable<Book> addBookRest(Book book, Model model) {
 		System.out.println("REST:Book:" + book.getTitle() + " " + book.getId() + " book:" + book);
 		bookrepository.save(book);
@@ -53,6 +55,7 @@ public class BookRestController {
 	
 	// RESTful service to delete id book - toimii
 	@DeleteMapping("/books/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Iterable<Book> deleteBookRest(@PathVariable("id") Long bookId, Model model) {
 		System.out.println("RESTful: bookId:" + bookId);
 		bookrepository.deleteById(bookId);

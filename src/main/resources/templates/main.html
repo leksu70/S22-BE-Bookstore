@@ -4,14 +4,27 @@
 <head>
 	<title>Main Page</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	
 </head>
 <body>
-	<h1>Bookstore</h1>
 	
-	<a href="/booklist">Book list</a><br />
-	<a href="/catlist">Category list</a><br />
-	<br /><br />
-	<a href="/logout"><i>Kirjaudu ulos</i></a>
+	<div class="container">
+		<div class="col-xs-9">
+			<h1>Bookstore</h1>
+		</div>
+		
+		<div class="col-xs-3" style="padding:5px 0px 5px 5px" th:align="left" >
+		<h5 th:inline="text" th:align="center" ><b>User: [[${#httpServletRequest.remoteUser}]]</b></h5>
+			<form th:action="@{/logout}" method="post" th:align="center">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+			</form>
+		</div>
+		<div class="col-xs-12">
+			<a href="/booklist">Book list</a><br />
+			<a href="/catlist">Category list</a><br />
+		</div>
+	</div>
 </body>
 
 </html>

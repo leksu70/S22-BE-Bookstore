@@ -1,27 +1,41 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Categorylist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Categories</h1>
-	<table class="table table-striped">
-		<tr>
-		    <th>Name</th>
-		    <th>Actions</th>
-		    
-		</tr>
-		<tr th:each="cat : ${categories}">
-			<td th:text="${cat.name}" />			
-			<td>
-				<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/cat/{id}(id=${cat.catid})}" class="btn btn-danger">Delete</a>
-			    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a>
-			    </td>
-    	</tr>
-     </table>
-     <br />
-	 <a sec:authorize="hasAuthority('ADMIN')" href="/addcat" class="btn btn-success">Add Category</a>    	
+	<div class="container">
+		<div class="col-xs-9">
+			<h1>Categories</h1>
+		</div>
+		<div class="col-xs-3" style="padding:5px 0px 5px 5px" th:align="left">
+			<h5 th:inline="text" th:align="center" ><b>User: [[${#httpServletRequest.remoteUser}]]</b></h5>
+			<form th:action="@{/logout}" method="post" th:align="center">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+			</form>
+		</div>
+		
+		<div class="col-xs-12">
+	
+			<table class="table table-striped">
+				<tr>
+				    <th>Name</th>
+				    <th>Actions</th>
+				</tr>
+				<tr th:each="cat : ${categories}">
+					<td th:text="${cat.name}" />			
+					<td>
+						<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/cat/{id}(id=${cat.catid})}" class="btn btn-danger">Delete</a>
+					    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a>
+					</td>
+		    	</tr>
+		    </table>
+     		<br />
+			<a sec:authorize="hasAuthority('ADMIN')" href="/addcat" class="btn btn-success">Add Category</a>
+		</div>
+	</div>
 </body>
 </html>
