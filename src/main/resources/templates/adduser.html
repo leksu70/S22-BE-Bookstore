@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Add user</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="col-xs-9">
+			<h1>Add user</h1>
+		</div>
+		<div class="col-xs-3" style="padding:5px 0px 5px 5px" th:align="left">
+			<h5 th:inline="text" th:align="center" ><b>User: [[${#httpServletRequest.remoteUser}]]</b></h5>
+			<form th:action="@{/logout}" method="post" th:align="center">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+			</form>
+		</div>
+
+<h1>KESKEN 11.10.2022</h1>
+		<div class="col-xs-12">
+			<form action="#" th:object="${user}" th:action="@{saveuser}" method="post">
+				<table class="table table-striped">
+					<tr>
+						<td>First name: </td>
+						<td><input type="text" th:field="*{firstName}" /></td>
+						<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</td>
+					</tr>
+					<tr>
+						<td>Last name: </td>
+						<td><input type="text" th:field="*{lastName}" /></td>
+						<td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</td>
+					</tr>
+					<tr>
+						<td>Role: </td>
+						<td><input type="text" th:field="*{role}" size="4" /></td>
+						<td th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Error</td>
+					</tr>
+					<tr>
+						<td>Username: </td>
+						<td><input type="text" th:field="*{username}" /></td>
+						<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</td>
+					</tr>
+					
+					<tr>
+						<td>Category:
+						<td><select id="catlist" th:field="*{category}" >
+	       					<option th:each="category: ${categories}" th:value="${category.catid}" th:text="${category.name}"></option>
+	    				</select></td>
+	    				<td></td>
+					</tr>					
+				</table>
+				<div style="clear: both; display: block; height: 10px;"></div>						
+				<input type="submit" value="Save" sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+</body>
+	
+</html>

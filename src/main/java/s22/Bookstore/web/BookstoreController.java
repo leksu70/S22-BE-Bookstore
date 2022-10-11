@@ -129,7 +129,7 @@ public class BookstoreController {
 	
 	@GetMapping("/userlist")
 	public String userList(Model model) {
-		model.addAttribute("categories", userrepository.findAll());
+		model.addAttribute("users", userrepository.findAll());
 		return "userlist";
 	}
 	
@@ -137,8 +137,8 @@ public class BookstoreController {
 	@GetMapping("/adduser")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addUser(Model model) {
-		model.addAttribute("category", new User());
-		model.addAttribute("categories", userrepository.findAll());
+		model.addAttribute("user", new User());
+		model.addAttribute("users", userrepository.findAll());
 		return "adduser";
 	}
 	
@@ -146,7 +146,7 @@ public class BookstoreController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editUser(@PathVariable("id") Long userId, Model model) {
 		System.out.println("userId(id):"+userId);
-		model.addAttribute("category", userrepository.findById(userId));
+		model.addAttribute("user", userrepository.findById(userId));
 		return "/edituser";
 	}
 	
