@@ -25,14 +25,14 @@ public class WebSecurityConfig {
 
 		return http.authorizeRequests(auth -> {
 			// css folder is accessible for all
-			auth.antMatchers("/", "/booklist", "/main").permitAll();
+			auth.antMatchers("/login").permitAll();
 			
 			auth.antMatchers("/h2-console").permitAll();
 			// hasRole is not working with H2
 			// auth.antMatchers("/owners/**").hasRole("ADMIN");
 			
 			// if user's role is ADMIN s/he has access to all pages "under" owners
-			auth.antMatchers("/owners/**").hasAuthority("ADMIN");
+			//bauth.antMatchers("/owners/**").hasAuthority("ADMIN");
 			
 			// every http request will be authenticated!!!
 			auth.anyRequest().authenticated();

@@ -33,7 +33,7 @@ public class BookstoreController {
 		return "booklist";
 	}
 	
-	@GetMapping("/main")
+	@GetMapping({ "/main" })
 	public String runMain() {
 		return "/main";
 	}
@@ -128,18 +128,32 @@ public class BookstoreController {
 	// User part
 	
 	@GetMapping("/userlist")
+//	@PreAuthorize("hasAuthority('ADMIN')")
 	public String userList(Model model) {
 		model.addAttribute("users", userrepository.findAll());
 		return "userlist";
 	}
 	
-	
 	@GetMapping("/adduser")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String addUser(Model model) {
+	public String addUser(User user, BindingResult bindingResult, Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("users", userrepository.findAll());
+		// Leo 25.10.2022: Role: user tai admin ovat käyttöliittymässä.
 		return "adduser";
+	}
+	
+	@PostMapping("/saveuser")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String saveUser(@Valid User user, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println("some error happened. user.id:" + user.getId());
+			// Virhe! Luo uuden entryn
+			model.addAttribute("user", userrepository.findById(user.getId()));
+			//model.addAttribute("usercategories", userrepository.findAll());
+			return "edituser";
+		}
+		userrepository.save(user);
+		return "redirect:userlist";
 	}
 	
 	@GetMapping("/edit/user/{id}")

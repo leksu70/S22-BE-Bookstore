@@ -19,18 +19,18 @@
 		</div>
 		
 		<div class="col-xs-12">
-	
 			<table class="table table-striped">
 				<tr>
-				    <th>Name</th>
-				    <th>Actions</th>
+				    <th >Name</th>
+				    <th >Actions</th>
 				</tr>
 				<tr th:each="cat : ${categories}">
-					<td th:text="${cat.name}" />			
-					<td>
-						<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/cat/{id}(id=${cat.catid})}" class="btn btn-danger">Delete</a>
-					    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a>
+					<td th:text="${cat.name}" />
+					<td sec:authorize="hasAuthority('ADMIN')">
+						<a th:href="@{/delete/cat/{id}(id=${cat.catid})}" class="btn btn-danger">Delete</a>
+					    <a th:href="@{/edit/cat/{id}(id=${cat.catid})}" class="btn btn-primary">Edit</a>
 					</td>
+					<td sec:authorize="hasAuthority('USER')" />
 		    	</tr>
 		    </table>
      		<br />

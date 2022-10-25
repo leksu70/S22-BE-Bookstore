@@ -22,22 +22,25 @@
 	
 			<table class="table table-striped">
 				<tr>
-				    <th>firstName</th>
-				    <th>lastName</th>
-				    <th>role</th>
-				    <th>username</th>
-				    <th>passwordHash</th>
+				    <th>First name</th>
+				    <th>Last name</th>
+				    <th>Role</th>
+				    <th>Username</th>
+				    <th>Password Hash</th>
+				    <th>Actions</th>
 				</tr>
 				<tr th:each="user : ${users}">
 					<td th:text="${user.firstName}" />			
 					<td th:text="${user.lastName}" />			
 					<td th:text="${user.role}" />			
 					<td th:text="${user.username}" />			
-					<td th:text="${user.passwordHash}" />			
-					<td>
+					<td sec:authorize="hasAuthority('ADMIN')" th:text="${user.passwordHash}"></td>
+					<td sec:authorize="hasAuthority('USER')" />		
+					<td> 
 						<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/user/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
 					    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/edit/user/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
 					</td>
+					
 		    	</tr>
 		    </table>
      		<br />
