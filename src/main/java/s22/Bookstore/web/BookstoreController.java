@@ -35,7 +35,7 @@ public class BookstoreController {
 	
 	@GetMapping({ "/main" })
 	public String runMain() {
-		return "main";
+		return "/main";
 	}
 
 	@GetMapping("/addbook")

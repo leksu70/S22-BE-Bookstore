@@ -35,9 +35,12 @@ public class WebSecurityConfig {
 			//bauth.antMatchers("/owners/**").hasAuthority("ADMIN");
 			
 			// every http request will be authenticated!!!
-			auth.anyRequest().authenticated();
+			// 20221121: commented out /LS
+			//auth.anyRequest().authenticated();
+			
+			// 20221121: Uncommented /LS
 			// Voi olla myös erikseen valitut
-			//auth.antMatchers("/", "/booklist");
+			auth.antMatchers("/", "/booklist", "/main").permitAll();
 			
 		}).csrf().ignoringAntMatchers("h2-console").and()
 				// tells where to go after successful login: "landing page"
