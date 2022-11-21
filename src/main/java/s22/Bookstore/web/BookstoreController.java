@@ -57,7 +57,7 @@ public class BookstoreController {
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookrepository.findById(bookId));
 		model.addAttribute("categories", catrepository.findAll());
-		return "/editbook";
+		return "editbook"; // 20221121 /LS
 	}
 	
 	@PostMapping("/savebook")
