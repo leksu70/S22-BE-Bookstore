@@ -27,12 +27,14 @@ public class BookstoreController {
 	@Autowired
 	private UserRepository userrepository;
 
+	@PreAuthorize("isAuthenticated()") // 20221121 /LS
 	@GetMapping({ "/booklist" })
 	public String bookList(Model model) {
 		model.addAttribute("books", bookrepository.findAll());
 		return "booklist";
 	}
 	
+	@PreAuthorize("isAuthenticated()") // 20221121 /LS
 	@GetMapping({ "/", "/main" }) // 20221121 /LS
 	public String runMain() {
 		return "main"; // 20221121 /LS
@@ -95,6 +97,7 @@ public class BookstoreController {
 	
 	// Categories part
 	
+	@PreAuthorize("isAuthenticated()") // 20221121 /LS
 	@GetMapping("/catlist")
 	public String catList(Model model) {
 		model.addAttribute("categories", catrepository.findAll());
@@ -127,6 +130,7 @@ public class BookstoreController {
 	
 	// User part
 	
+	@PreAuthorize("isAuthenticated()") // 20221121 /LS
 	@GetMapping("/userlist")
 //	@PreAuthorize("hasAuthority('ADMIN')")
 	public String userList(Model model) {
