@@ -27,15 +27,15 @@ public class BookstoreController {
 	@Autowired
 	private UserRepository userrepository;
 
-	@GetMapping({ "/", "/booklist" })
+	@GetMapping({ "/booklist" })
 	public String bookList(Model model) {
 		model.addAttribute("books", bookrepository.findAll());
 		return "booklist";
 	}
 	
-	@GetMapping({ "/main" })
+	@GetMapping({ "/", "/main" }) // 20221121 /LS
 	public String runMain() {
-		return "/main";
+		return "main"; // 20221121 /LS
 	}
 
 	@GetMapping("/addbook")
