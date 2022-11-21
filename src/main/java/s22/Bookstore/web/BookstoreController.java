@@ -115,7 +115,7 @@ public class BookstoreController {
 	public String editCat(@PathVariable("id") Long catId, Model model) {
 		System.out.println("catID(id):"+catId);
 		model.addAttribute("category", catrepository.findById(catId));
-		return "/editcat";
+		return "editcat"; // 20221121 /LS
 	}
 	
 	@GetMapping("/delete/cat/{id}")
@@ -161,7 +161,7 @@ public class BookstoreController {
 	public String editUser(@PathVariable("id") Long userId, Model model) {
 		System.out.println("userId(id):"+userId);
 		model.addAttribute("user", userrepository.findById(userId));
-		return "/edituser";
+		return "edituser";
 	}
 	
 	@GetMapping("/delete/user/{id}")
